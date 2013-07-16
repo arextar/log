@@ -1,26 +1,21 @@
 <script>
-function log (type, data) {
+function log_ (type, data) {
 	var xhr = new XMLHttpRequest()
 
 	xhr.open('POST', 'http://localhost:1337/' + type)
 
-	xhr.send(data)
+	xhr.send(JSON.stringify(data))
 }
 
-var proto = console.constructor.prototype
-
-for (var x in proto) {
-	proto[x] = function (old, name) {
-		return function (data) {
-			old.call(console, data)
-			log(name, data)
-		}
-	} (proto[x], x)
+var log = {
+	log: function () {
+		log_('log', [].slice.call(arguments))
+	}
 }
 
 var i = 0
 
 setInterval(function () {
-	console.log(i++)
+	log.log(i++, {a: 12})
 }, 20)
 </script>
