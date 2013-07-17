@@ -10,12 +10,28 @@ function log_ (type, data) {
 var log = {
 	log: function () {
 		log_('log', [].slice.call(arguments))
+	},
+
+	info: function () {
+		log_('info', [].slice.call(arguments))
+	},
+
+	pass: function () {
+		log_('pass', [].slice.call(arguments))
+	},
+
+	warn: function () {
+		log_('warn', [].slice.call(arguments))
+	},
+
+	err: function () {
+		log_('err', [].slice.call(arguments))
 	}
 }
 
-var i = 0
-
-setInterval(function () {
-	log.log(i++, {a: 12})
-}, 20)
+log.log(1)
+log.info(2)
+log.pass(3)
+log.warn(4)
+log.err(5)
 </script>
